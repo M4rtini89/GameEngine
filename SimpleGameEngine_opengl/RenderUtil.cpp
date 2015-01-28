@@ -38,3 +38,13 @@ void RenderUtil::setTextures(bool enabled)
 		glDisable(GL_TEXTURE_2D);
 }
 
+void RenderUtil::setClearColor(sf::Vector3f color)
+{
+	glClearColor(color.x, color.y, color.z, 1.f);
+}
+
+void RenderUtil::unbindTextures()
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+

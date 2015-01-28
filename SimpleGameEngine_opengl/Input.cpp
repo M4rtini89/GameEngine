@@ -1,9 +1,11 @@
 #include "SFML\Window\Keyboard.hpp"
 #include "SFML\Window\Mouse.hpp"
+#include "SFML\Window\Window.hpp"
 
 #include <vector>
 
 #include "Input.h"
+#include "MainComponent.h"
 
 bool contains(const keyMap &vec, const int &value)
 {
@@ -117,6 +119,19 @@ Input::~Input()
 {
 }
 
+void Input::setMousePosition(sf::Vector2i pos, const sf::Window* relativeTo)
+{
+	sf::Mouse::setPosition(sf::Vector2i(pos.x, pos.y), *relativeTo);
+}
+
+void Input::setCursorLock(sf::Window* window, bool isLocked)
+{
+	window->setMouseCursorVisible(!isLocked);
+	mouseLocked = isLocked;
+	sf::Vector2i centerPos = sf::Vector2i(window->getSize().x / 2, window->getSize().y / 2);
+	setMousePosition(centerPos, window);
+}
+
 keyMap Input::keyCurrent;
 keyMap Input::keyUp;
 keyMap Input::keyDown;
@@ -124,3 +139,5 @@ keyMap Input::keyDown;
 keyMap Input::mouseCurrent;
 keyMap Input::mouseUp;
 keyMap Input::mouseDown;
+
+bool Input::mouseLocked = false;

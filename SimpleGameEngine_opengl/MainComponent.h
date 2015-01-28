@@ -22,7 +22,7 @@ public:
 
 	sf::ContextSettings getContextSettings() const;
 
-	static const sf::Window* const getWindow() { return m_window; }
+	static sf::Window* const getWindow() { return m_window; }
 	MainComponent(sf::Window* window);
 	~MainComponent();
 };

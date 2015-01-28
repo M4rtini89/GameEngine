@@ -119,6 +119,11 @@ void Shader::setUniform(std::string uniformName, Matrix4f value)
 	glUniformMatrix4fv(m_uniforms[uniformName],1, true, p);
 }
 
+void Shader::updateUniform(Matrix4f worldMatrix, Matrix4f projectedMatrix)
+{
+
+}
+
 static int CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage)
 {
 	GLint success = 0;

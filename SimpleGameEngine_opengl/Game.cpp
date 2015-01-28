@@ -6,9 +6,15 @@
 #include "ResourceLoader.h"
 #include "Shader.h"
 #include "constants.h"
+#include "Vector.h"
+#include "RenderUtil.h"
 
 void Game::input()
 {
+	if (Input::getMouseDown(sf::Mouse::Left))
+		Input::setCursorLock(MainComponent::getWindow(), true);
+	if (Input::getMouseUp(sf::Mouse::Left))
+		Input::setCursorLock(MainComponent::getWindow(), false);
 }
 
 float temp_ = 0.0;
@@ -24,21 +30,19 @@ void Game::update(const float dt)
 
 void Game::render()
 {
+	RenderUtil::setClearColor(Vector::abs(m_transform.getCamera()->Pos() / 2048.f));
+
 	m_shader.bind();
-	m_shader.setUniform("transform", m_transform.getProjectedTransform());
-	m_texture.bind();
+	m_shader.updateUniform(m_transform.getTransform(), m_transform.getProjectedTransform(), m_material);
+
 	m_mesh.draw();
 }
 
-Game::Game() : m_texture(ResourceLoader::loadTexture("default.png"))
+Game::Game() 
+	: m_material(ResourceLoader::loadTexture("default.png"), sf::Vector3f(1, 1, 1))
 {
 	m_mesh = Mesh();
-	m_shader = Shader();
-	m_shader.addVertexShader(ResourceLoader::loadShader("basicVertex.vs"));
-	m_shader.addFragmentShader(ResourceLoader::loadShader("basicFragment.fs"));
-	m_shader.compileShader();
-
-	m_shader.addUniform("transform");
+	m_shader = BasicShader();
 
 	//ResourceLoader::loadMesh("cube2.obj", m_mesh);
 	//ResourceLoader::loadMesh("monkey.obj", m_mesh);
@@ -51,9 +55,9 @@ Game::Game() : m_texture(ResourceLoader::loadTexture("default.png"))
 	};
 
 	std::vector<int> indices{
-			0, 1, 3,
-			3, 1, 2,
-			2, 1, 0,
+			3, 1, 0,
+			2, 1, 3,
+			0, 1, 2,
 			0, 2, 3
 		};
 

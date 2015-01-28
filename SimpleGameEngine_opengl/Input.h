@@ -17,6 +17,8 @@ private:
 	static keyMap mouseDown;
 	static keyMap mouseCurrent;
 
+	static bool mouseLocked;
+
 public:
 
 	static const unsigned int NUM_KEYS = 256;
@@ -32,6 +34,11 @@ public:
 	static bool getKeyDown(const unsigned int keyCode);
 	static bool getMouseUp(const unsigned int keyCode);
 	static bool getMouseDown(const unsigned int keyCode);
+
+	static bool getMouseLock() { return mouseLocked; };
+
+	static void setMousePosition(sf::Vector2i pos, const sf::Window* relativeTo);
+	static void setCursorLock(sf::Window* window, bool isLocked);
 
 
 	Input();

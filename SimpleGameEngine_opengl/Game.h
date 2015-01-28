@@ -2,18 +2,18 @@
 #include "SFML\Window\Event.hpp"
 #include "SFML\System\Time.hpp"
 #include "Mesh.h"
-#include "Shader.h"
 #include "Transform.h"
-#include "Texture.h"
+#include "BasicShader.h"
+#include "Material.h"
 
 class Game
 {
 private:
 	Mesh m_mesh;
-	Shader m_shader;
+	BasicShader m_shader;
 	Transform m_transform;
 	Camera m_camera;
-	Texture m_texture;
+	Material m_material;
 public:
 
 	void input();

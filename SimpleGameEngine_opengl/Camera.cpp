@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "SFML\Window\Keyboard.hpp"
 #include <iostream>
+#include "MainComponent.h"
 
 using Vector::normalized; 
 using Vector::cross;
@@ -64,6 +65,7 @@ void Camera::rotateY(float angle)
 
 void Camera::input(float dt)
 {
+	float sensitivity = 0.5f;
 	float moveAmt = 10 * dt;
 	float rotAmt = 100 * dt;
 
@@ -85,6 +87,22 @@ void Camera::input(float dt)
 		rotateY(-rotAmt);
 	if (Input::getKey(sf::Keyboard::Right))
 		rotateY(rotAmt);
+
+	if (Input::getMouseLock())
+	{
+		const sf::Window* window = MainComponent::getWindow();
+		sf::Vector2i mousePos = Input::getMousePosition(window);
+		sf::Vector2i centerPos = sf::Vector2i(window->getSize().x/2, window->getSize().y/2);
+		sf::Vector2i deltaPos = mousePos - centerPos;
+
+		if (deltaPos.x != 0)
+			rotateY(deltaPos.x * sensitivity);
+		if (deltaPos.y != 0)
+			rotateX((deltaPos.y * sensitivity));
+
+		Input::setMousePosition(centerPos, window);
+
+	}
 }
 
 const sf::Vector3f Camera::yAxis = sf::Vector3f(0, 1, 0);

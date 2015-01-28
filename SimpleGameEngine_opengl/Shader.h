@@ -25,6 +25,8 @@ public:
 	void setUniform(std::string uniformName, sf::Vector3f value);
 	void setUniform(std::string uniformName, Matrix4f value);
 
+	void updateUniform(Matrix4f worldMatrix, Matrix4f projectedMatrix);
+
 	Shader();
 	~Shader();
 };
