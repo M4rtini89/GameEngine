@@ -3,6 +3,7 @@
 #include "ResourceLoader.h"
 #include "Material.h"
 #include "RenderUtil.h"
+#include "Transform.h"
 
 DirectionalLight PhongShader::m_directionalLight = DirectionalLight(BaseLight(sf::Vector3f(0, 0, 0), 0), sf::Vector3f(0, 0, 0));
 
@@ -23,6 +24,10 @@ PhongShader::PhongShader() : Shader()
 	addUniform("directionalLight.base.color");
 	addUniform("directionalLight.base.intensity");
 	addUniform("directionalLight.direction");
+	
+	addUniform("specularIntensity");
+	addUniform("specularPower");
+	addUniform("eyePosition");
 }
 
 
@@ -49,6 +54,11 @@ void PhongShader::updateUniform(Matrix4f worldMatrix, Matrix4f projectedMatrix, 
 	setUniform("directionalLight.direction", m_directionalLight.direction);
 	setUniform("directionalLight.base.color", m_directionalLight.base.color);
 	setUniformf("directionalLight.base.intensity", m_directionalLight.base.intensity);
+
+	setUniformf("specularIntensity", material.getSpecularIntensity());
+	setUniformf("specularPower", material.getSpecularPower());
+	setUniform("eyePosition", Transform::getCamera()->Pos());
+
 }
 
 //void PhongShader::setUniform(std::string uniformName, BaseLight baseLight)

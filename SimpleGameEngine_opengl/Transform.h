@@ -16,7 +16,7 @@ private:
 	sf::Vector3f m_rotation;
 	sf::Vector3f m_scale;
 
-	Camera* m_camera;
+	static Camera* m_camera;
 
 public:
 
@@ -26,7 +26,7 @@ public:
 	void setRotate(const float x, const float y, const float z);
 	void setScale(const sf::Vector3f vec);
 	void setScale(const float x, const float y, const float z);
-	Camera* getCamera() const { return m_camera; };
+	static Camera* getCamera() { return m_camera; };
 	void setCamera(Camera* val) { m_camera = val; };
 
 

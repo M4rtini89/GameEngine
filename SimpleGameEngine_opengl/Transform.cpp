@@ -80,6 +80,8 @@ Matrix4f Transform::getProjectedTransform()
 
 }
 
+Camera* Transform::m_camera;
+
 float Transform::zNear;
 float Transform::zFar;
 float Transform::width;

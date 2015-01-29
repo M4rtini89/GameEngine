@@ -20,7 +20,7 @@ void Game::input()
 float temp_ = 0.0;
 void Game::update(const float dt)
 {
-	m_camera.input(dt);
+	//m_camera.input(dt);
 	temp_ += dt;
 	float sinTemp = std::sin(temp_);
 	m_transform.setTranslate(0, 0, 5);
