@@ -14,6 +14,7 @@ void Shader::addUniform(std::string uniform)
 	if (uniformLocation == -1)
 	{
 		fprintf(stderr, "Error: Could not find uniform location");
+		system("pause");
 		exit(1);
 	}
 	m_uniforms[uniform] = uniformLocation;
@@ -41,6 +42,7 @@ void Shader::addProgram(std::string text, int type)
 	if (shader == 0)
 	{
 		fprintf(stderr, "Shader creation failed: Could not find valid memory location when adding shader");
+		system("pause");
 		exit(1);
 	}
 	const char *c_str = text.c_str();
@@ -61,6 +63,7 @@ void Shader::addProgram(std::string text, int type)
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(shader, maxLength, &maxLength, &errorLog[0]);
 		fprintf(stderr, "Error compiling shader type %d: '%s'\n", shader, errorLog);
+		system("pause");
 		exit(1);
 	}
 	glAttachShader(m_program, shader);
@@ -73,6 +76,7 @@ Shader::Shader()
 	if (m_program == 0)
 	{
 		fprintf(stderr, "Shader creation failed: Could not find valid memory location in constructor");
+		system("pause");
 		exit(1);
 	}
 }

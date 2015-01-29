@@ -5,12 +5,13 @@
 #include "Transform.h"
 #include "BasicShader.h"
 #include "Material.h"
+#include "PhongShader.h"
 
 class Game
 {
 private:
 	Mesh m_mesh;
-	BasicShader m_shader;
+	PhongShader m_shader;
 	Transform m_transform;
 	Camera m_camera;
 	Material m_material;

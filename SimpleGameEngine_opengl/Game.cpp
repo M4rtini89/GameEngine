@@ -24,7 +24,7 @@ void Game::update(const float dt)
 	temp_ += dt;
 	float sinTemp = std::sin(temp_);
 	m_transform.setTranslate(0, 0, 5);
-	m_transform.setRotate(0, temp_ * 100, 0);
+	m_transform.setRotate(0, sinTemp * 180, 0);
 	//m_transform.setScale(0.5, 0.5, 0.5);
 }
 
@@ -42,26 +42,40 @@ Game::Game()
 	: m_material(ResourceLoader::loadTexture("default.png"), sf::Vector3f(1, 1, 1))
 {
 	m_mesh = Mesh();
-	m_shader = BasicShader();
+	m_shader = PhongShader();
+	m_shader.setAmbientLight(sf::Vector3f(.1f, .1f, .1f));
+	m_shader.setDirectionalLight(DirectionalLight(BaseLight(sf::Vector3f(1, 1, 1), 0.8f), sf::Vector3f(1, 1, 1)));
 
 	//ResourceLoader::loadMesh("cube2.obj", m_mesh);
 	//ResourceLoader::loadMesh("monkey.obj", m_mesh);
 
 	std::vector<Vertex> vertices{
-		Vertex(sf::Vector3f(-1, -1, 0), sf::Vector2f(0, 0)),
-		Vertex(sf::Vector3f(0, 1, 0), sf::Vector2f(0.5, 0)),
-		Vertex(sf::Vector3f(1, -1, 0), sf::Vector2f(1, 0)),
-		Vertex(sf::Vector3f(0, -1, 1), sf::Vector2f(0, 0.5)),
+		Vertex(sf::Vector3f(-1, -1, 0.5773), sf::Vector2f(0.0, 0.0)),
+		Vertex(sf::Vector3f(0, -1, -1.15475), sf::Vector2f(0.5, 0.0)),
+		Vertex(sf::Vector3f(1, -1, 0.5773), sf::Vector2f(1, 0)),
+		Vertex(sf::Vector3f(0, 1, 0), sf::Vector2f(0.5, 1.0)),
 	};
 
 	std::vector<int> indices{
-			3, 1, 0,
-			2, 1, 3,
-			0, 1, 2,
-			0, 2, 3
+		0, 3, 1,
+		1, 3, 2,
+		2, 3, 0,
+		1, 2, 0
 		};
 
-	m_mesh.addVertices(&vertices[0], vertices.size(), &indices[0], indices.size());
+	//std::vector<Vertex> vertices{
+	//	Vertex(sf::Vector3f(-1, -1, 0), sf::Vector2f(0.0, 0.0)),
+	//	Vertex(sf::Vector3f(-1, 1, 0), sf::Vector2f(1.0, 0.0)),
+	//	Vertex(sf::Vector3f(1, 1, 0), sf::Vector2f(1.0, 1.0)),
+	//	Vertex(sf::Vector3f(1, -1, 0), sf::Vector2f(1, 0.0)),
+	//};
+
+	//std::vector<int> indices{
+	//	0, 1, 3,
+	//	1, 2, 3
+	//};
+
+	m_mesh.addVertices(&vertices[0], vertices.size(), &indices[0], indices.size(), true);
 
 
 

@@ -83,6 +83,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Matrix4f.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="PhongShader.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RenderUtil.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
@@ -93,15 +94,18 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseLight.h" />
     <ClInclude Include="BasicShader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MainComponent.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Matrix4f.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="PhongShader.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RenderUtil.h" />
     <ClInclude Include="resource.h" />
@@ -113,6 +117,12 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\basicFragment.fs" />
+    <None Include="res\shaders\basicVertex.vs" />
+    <None Include="res\shaders\phongFragment.fs" />
+    <None Include="res\shaders\phongVertex.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

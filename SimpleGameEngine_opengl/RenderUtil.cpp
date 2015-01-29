@@ -12,7 +12,7 @@ void RenderUtil::clearScreen()
 
 void RenderUtil::initGraphics()
 {
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClearColor(0, 0, 0, 0.0);
 
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
@@ -22,7 +22,8 @@ void RenderUtil::initGraphics()
 
 	//TODO DEPTH clamp for later
 
-	glEnable(GL_FRAMEBUFFER_SRGB);
+	//glEnable(GL_FRAMEBUFFER_SRGB);
+	glEnable(GL_ARB_framebuffer_sRGB);
 }
 
 std::string RenderUtil::getOpenGLVersion()
